@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Page</title>
+    <title>Personal Website</title>
+    <meta name="description" content="Personal website of Angela Gui">
+    
+    <!-- Meta tags for link previews -->
+    <meta property="og:title" content="Angela Gui - Personal Website">
+    <meta property="og:description" content="A personal website showcasing my projects and interests in ML and HCI research.">
+    <meta property="og:image" content="https://xgui2001.github.io/cs5356-hw3/profile.jpg">
+    <meta property="og:url" content="https://xgui2001.github.io/cs5356-hw3/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,7 +32,7 @@
         <section id="about">
             <h2>About Me</h2>
             <div class="about-content">
-                <img src="profile.jpg" class="profile-image">
+                <img src="profile.jpg" class="profile-image" alt="Angela Gui">
                 <article>
                     <p>Hello! My name is Angela Gui. I am a student studying Connective Media at Cornell Tech. Previously I studied CS and art history at Williams College. I am interested in applications of machine learning within HCI research, If you are interested in similar things, lets connect! </p>
                     <details>
@@ -37,16 +47,37 @@
             <h2>Projects</h2>
             <div class="project-grid">
                 <article class="project-card">
-                    <h3>Project 1</h3>
-                    <p>WCMA vibe checker</p>
+                    <div class="card-front">
+                        <h3>Project 1</h3>
+                        <p>WCMA vibe checker</p>
+                        <p class="hover-hint">(Hover to learn more)</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>About WCMA vibe checker</h3>
+                        <p>An ML-based tool that analyzes the mood of artwork at the Williams College Museum of Art.</p>
+                    </div>
                 </article>
                 <article class="project-card">
-                    <h3>Project 2</h3>
-                    <p>1-800-got photos!</p>
+                    <div class="card-front">
+                        <h3>Project 2</h3>
+                        <p>1-800-got photos!</p>
+                        <p class="hover-hint">(Hover to learn more)</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>About 1-800-got photos!</h3>
+                        <p>A took to help you convert image types (got tired of these HEIC airdrops?) .</p>
+                    </div>
                 </article>
                 <article class="project-card">
-                    <h3>Project 3</h3>
-                    <p>Watercube </p>
+                    <div class="card-front">
+                        <h3>Project 3</h3>
+                        <p>Watercube</p>
+                        <p class="hover-hint">(Hover to learn more)</p>
+                    </div>
+                    <div class="card-back">
+                        <h3>About Watercube</h3>
+                        <p>An interactive 2D water simulator that you can play with.</p>
+                    </div>
                 </article>
             </div>
         </section>
@@ -56,11 +87,6 @@
             <div id="api-content">
             </div>
         </section>
-        
-        <div class="css-feature">
-            <h3>New CSS Property Exploration</h3>
-            <p>I chose to explore the CSS property <code>backdrop-filter</code>, which allows you to apply graphical effects like blurring to the area behind an element. It's useful for creating frosted glass effects and maintaining readability when text overlaps with busy backgrounds.</p>
-        </div>
     </main>
 
     <footer>
