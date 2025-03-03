@@ -1,0 +1,3 @@
+Personal website for Angela
+
+Featuring: the cat api, hover project cards, the goat counter analytics tool and more...
