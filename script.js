@@ -85,7 +85,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 catContainer.textContent = 'Failed to load cat. Please try again.';
             });
     });
-
-    <script data-goatcounter="https://xgui2001.goatcounter.com/count"
-    async src="//gc.zgo.at/count.js"></script>
 });
