@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show loading message
         catContainer.textContent = 'Loading cat...';
         
-        // Fetch a cat from the CATAAS API
-        fetch('https://cataas.com/cat?json=true')
+        // Fetch a cat from The Cat API
+        fetch('https://api.thecatapi.com/v1/images/search')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch cat');
@@ -39,12 +39,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                // The API returns an array with one object
+                const catData = data[0];
+                
                 // Clear previous content
                 catContainer.innerHTML = '';
                 
                 // Create image element
                 const img = document.createElement('img');
-                img.src = `https://cataas.com/cat/${data._id}`;
+                img.src = catData.url;
                 img.alt = 'Random cat';
                 img.style.width = '100%';
                 img.style.maxWidth = '500px';
@@ -67,9 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Add some data from the JSON response
                 info.innerHTML = `
-                    <p><strong>Cat ID:</strong> ${data._id}</p>
-                    <p><strong>Created at:</strong> ${new Date(data.createdAt).toLocaleDateString()}</p>
-                    ${data.tags && data.tags.length > 0 ? `<p><strong>Tags:</strong> ${data.tags.join(', ')}</p>` : ''}
+                    <p><strong>Cat ID:</strong> ${catData.id}</p>
+                    <p><strong>Width:</strong> ${catData.width}px</p>
+                    <p><strong>Height:</strong> ${catData.height}px</p>
                 `;
                 
                 // Add elements to container
