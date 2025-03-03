@@ -4,85 +4,81 @@ document.addEventListener('DOMContentLoaded', function() {
     const apiContent = document.getElementById('api-content');
     
     // Create a button element
-    const catButton = document.createElement('button');
-    catButton.textContent = 'Show me a cat!';
-    catButton.className = 'cat-button';
-    catButton.style.backgroundColor = '#A4B080';
-    catButton.style.color = '#424206';
-    catButton.style.border = 'none';
-    catButton.style.padding = '10px 20px';
-    catButton.style.borderRadius = '5px';
-    catButton.style.cursor = 'pointer';
-    catButton.style.margin = '20px 0';
-    catButton.style.fontWeight = 'bold';
+    const factButton = document.createElement('button');
+    factButton.textContent = 'Show Random Fact';
+    factButton.className = 'fact-button';
+    factButton.style.backgroundColor = '#A4B080';
+    factButton.style.color = '#424206';
+    factButton.style.border = 'none';
+    factButton.style.padding = '10px 20px';
+    factButton.style.borderRadius = '5px';
+    factButton.style.cursor = 'pointer';
+    factButton.style.margin = '20px 0';
+    factButton.style.fontWeight = 'bold';
     
-    // Create a container for the cat image
-    const catContainer = document.createElement('div');
-    catContainer.id = 'cat-container';
-    catContainer.style.marginTop = '20px';
+    // Create a container for the fact
+    const factContainer = document.createElement('div');
+    factContainer.id = 'fact-container';
+    factContainer.style.marginTop = '20px';
     
     // Add button to the API section
-    apiContent.appendChild(catButton);
-    apiContent.appendChild(catContainer);
+    apiContent.appendChild(factButton);
+    apiContent.appendChild(factContainer);
     
     // Add event listener to button
-    catButton.addEventListener('click', function() {
+    factButton.addEventListener('click', function() {
         // Show loading message
-        catContainer.textContent = 'Loading cat...';
+        factContainer.textContent = 'Loading random fact...';
         
-        // Fetch a cat from The Cat API
-        fetch('https://api.thecatapi.com/v1/images/search')
+        // Fetch a random fact from the Useless Facts API
+        fetch('https://uselessfacts.jsph.pl/api/v2/facts/random?language=en', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Failed to fetch cat');
+                    throw new Error('Failed to fetch fact');
                 }
                 return response.json();
             })
-            .then(data => {
-                // The API returns an array with one object
-                const catData = data[0];
-                
+            .then(factData => {
                 // Clear previous content
-                catContainer.innerHTML = '';
+                factContainer.innerHTML = '';
                 
-                // Create image element
-                const img = document.createElement('img');
-                img.src = catData.url;
-                img.alt = 'Random cat';
-                img.style.width = '100%';
-                img.style.maxWidth = '500px';
-                img.style.borderRadius = '8px';
-                img.style.marginBottom = '10px';
+                // Create fact card
+                const factCard = document.createElement('div');
+                factCard.className = 'fact-card';
+                factCard.style.backgroundColor = '#DEE7B0';
+                factCard.style.padding = '20px';
+                factCard.style.borderRadius = '8px';
+                factCard.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                factCard.style.maxWidth = '600px';
                 
-                // Create a caption
-                const caption = document.createElement('p');
-                caption.textContent = "Here's a cat!";
-                caption.style.textAlign = 'center';
-                caption.style.fontWeight = 'bold';
-                caption.style.color = '#6D492F';
+                // Create fact text element
+                const factText = document.createElement('p');
+                factText.textContent = factData.text;
+                factText.style.fontSize = '18px';
+                factText.style.color = '#424206';
+                factText.style.lineHeight = '1.6';
+                factText.style.marginBottom = '15px';
                 
-                // Create container for displaying cat info from JSON
-                const info = document.createElement('div');
-                info.style.backgroundColor = '#DEE7B0';
-                info.style.padding = '10px';
-                info.style.borderRadius = '5px';
-                info.style.marginTop = '10px';
+                // Create source element
+                const factSource = document.createElement('p');
+                factSource.innerHTML = `<strong>Source:</strong> <a href="${factData.source_url}" target="_blank">${factData.source}</a>`;
+                factSource.style.fontSize = '14px';
+                factSource.style.color = '#6D492F';
                 
-                // Add some data from the JSON response
-                info.innerHTML = `
-                    <p><strong>Cat ID:</strong> ${catData.id}</p>
-                    <p><strong>Width:</strong> ${catData.width}px</p>
-                    <p><strong>Height:</strong> ${catData.height}px</p>
-                `;
+                // Add elements to card
+                factCard.appendChild(factText);
+                factCard.appendChild(factSource);
                 
-                // Add elements to container
-                catContainer.appendChild(img);
-                catContainer.appendChild(caption);
-                catContainer.appendChild(info);
+                // Add fact card to container
+                factContainer.appendChild(factCard);
             })
             .catch(error => {
                 console.error('Error:', error);
-                catContainer.textContent = 'Failed to load cat. Please try again.';
+                factContainer.textContent = 'Failed to load fact. Please try again.';
             });
     });
 });
